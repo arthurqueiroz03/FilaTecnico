@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/consulta.css">
+    <title>Consulta de atendimentos</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a id="agendar" href="http://127.0.0.1:5000">Agendar um Atendimento</a></li>
+                <li><a id="consultar" href="http://127.0.0.1:5000/tabela">Consultar Atendimentos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <input type="text" id="pesquisa" placeholder="Buscar por OS, nome..." />
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>O.S.</th>
+                <th>Cliente/Empresa</th>
+                <th>Máquina</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th>Técnico</th>
+            </tr>
+        </thead>
+        {% for agendamento in agendamentos %}
+        <tr>
+            <td>{{ agendamento[1] }}</td> <!-- Cliente -->
+            <td>{{ agendamento[2] }}</td> <!-- Modelo -->
+            <td>{{ agendamento[3] }}</td> <!-- Data -->
+            <td>{{ agendamento[4] }}</td> <!-- Hora -->
+            <td>{{ agendamento[5] }}</td> <!-- Tipo -->
+            <td>{{ agendamento[6] }}</td> <!-- Tipo -->
+            <td>{{ agendamento[7] }}</td> <!-- Tipo -->
+        </tr>
+        {% endfor %}
+        <tbody id="tabela-agenda">
+
+        </tbody>
+    </table>
+</body>
+
+</html>

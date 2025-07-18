@@ -1,0 +1,102 @@
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 60vh;
+    width: 90vh;
+ 
+    margin: 28px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="text"] {
+    color: #ffffffc0;
+    background-color: transparent;
+}
+
+label {
+    color: #ffffff;
+}
+
+input,
+button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+select {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    /* cor da borda */
+    color: #333;
+    /* cor da fonte */
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    appearance: none;
+    /* tira o estilo padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: #00c3ff; /* muda a borda quando está selecionado */
+  box-shadow: 0 0 0 2px rgba(46, 89, 125, 0.3);
+}
+
+#ok {
+    width: 100%;
+    padding: 20px;
+    margin-top: 70px;
+}
+
+#msg-sucesso {
+  display: none;
+  position: absolute;
+  color: green;
+  margin-top: 10px;
+  padding: 35px;
+  border-radius: 12px;
+  background-color: #fff;
+  z-index: 999;
+  height: 300px;
+  width: 900px;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 48px;
+  text-align: center;
+}

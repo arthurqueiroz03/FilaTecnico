@@ -1,0 +1,37 @@
+input[type="text"]{
+    color: #ffffffc0;
+    background-color: transparent;
+}
+
+input{
+    padding: 10px 100px 10px 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    position: fixed;
+    margin-left: 84vh;
+    top: 2vh;
+    z-index: 9999;
+}
+
+table {
+    margin-top: 10vh;
+    margin-left: 2vh;
+    width: 98%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #fff;
+}
+
+thead{
+    background-color: #000000;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th {
+    background-color: transparent;
+}

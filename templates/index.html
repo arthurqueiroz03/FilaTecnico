@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Fila Maq de corte </title>
-    <link rel="stylesheet" href="/css/PaginaPrincipal.css">
+    <title>Agendar um Atendimento</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/PaginaPrincipal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,14 +17,14 @@
     <header>
         <nav>
             <ul>
-                <li><a id="agendar" href="index.html">Agendar um Atendimento</a></li>
-                <li><a id="consultar" href="#">Consultar Atendimentos</a></li>
+                <li><a id="agendar" href="http://127.0.0.1:5000">Agendar um Atendimento</a></li>
+                <li><a id="consultar" href="http://127.0.0.1:5000/tabela">Consultar Atendimentos</a></li>
             </ul>
         </nav>
     </header>
     <div class="container">
-        <h1>Agendar Atendimento</h1>
-        <form id="form-agendamento">
+        <form action="/agendar" method="POST" id="form-agendamento">
+
             <label for="os">Nº da O.S.:</label>
             <input type="text" id="os" name="os" required>
 
@@ -32,11 +33,23 @@
 
             <label for="modelo">Modelo da Máquina:</label>
             <input type="text" id="modelo" name="modelo" required>
+
             <label for="data">Data:</label>
             <input type="date" id="data" name="data" required>
 
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" required>
+
+            <label for="tecnico">Técnico:</label>
+            <input type="text" id="tecnico" name="tecnico" required>
+            
+            <label for="tipo">Tipo de Atendimento:</label>
+            <select name="tipo" id="tipo" required>
+                <option value="">Selecione</option>
+                <option value="garantia">Garantia</option>
+                <option value="avulso">Avulso</option>
+                <option value="remoto">Remoto</option>
+            </select>
 
             <button type="submit">Agendar</button>
         </form>
@@ -57,8 +70,11 @@
         </table>
         -->
     </div>
-
-    <script src="/js/script.js"></script>
+    <div id="msg-sucesso">
+        Agendamento feito com sucesso!
+        <button id="ok">OK</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

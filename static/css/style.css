@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/static/img/wallpapersden.com_minimal-hd-landscape_1920x1080.jpg');
+    background-size: cover;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+header{
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+
+header nav ul {
+    font-size: 18 px;
+    display: flex;
+    justify-content: space-between;
+    gap: 60rem;
+}
+
+header nav ul li {
+    position: relative;
+    padding: 5px 0;
+}
+
+header nav ul li a{
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.5s ease, font-weight 0.5s ease;
+}
+
+
+header nav ul li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #00f7ff;
+    transition: width 0.5s ease;
+}
+
+header nav ul li:hover::after {
+    width: 100%;
+}
