@@ -32,7 +32,8 @@
             </tr>
         </thead>
         {% for agendamento in agendamentos %}
-        <tr>
+        <tr data-id="{{ agendamento[0] }}" style="cursor: pointer;">
+
             <td>{{ agendamento[1] }}</td> <!-- Cliente -->
             <td>{{ agendamento[2] }}</td> <!-- Modelo -->
             <td>{{ agendamento[3] }}</td> <!-- Data -->
@@ -46,6 +47,7 @@
 
         </tbody>
     </table>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ def conectar_bd():
 
 @app.route('/')
 def index():
-    return render_template('index.html')  # substitua se o nome do seu HTML for diferente
+    return render_template('index.html') 
 
 @app.route('/agendar', methods=['POST'])
 def agendar():
@@ -44,5 +44,14 @@ def mostrar_agendamentos():
 
     return render_template('tabela.html', agendamentos=agendamentos)
 
+@app.route('/apagar/<int:id>', methods=['POST'])
+def apagar_agendamento(id):
+    conn = sqlite3.connect('agendamentos.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM agendamentos WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return '', 204
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
