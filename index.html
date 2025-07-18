@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fila Maq de corte </title>
+    <link rel="stylesheet" href="/css/PaginaPrincipal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a id="agendar" href="index.html">Agendar um Atendimento</a></li>
+                <li><a id="consultar" href="#">Consultar Atendimentos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Agendar Atendimento</h1>
+        <form id="form-agendamento">
+            <label for="os">Nº da O.S.:</label>
+            <input type="text" id="os" name="os" required>
+
+            <label for="cliente">Nome do Cliente/Empresa:</label>
+            <input type="text" id="cliente" name="cliente" required>
+
+            <label for="modelo">Modelo da Máquina:</label>
+            <input type="text" id="modelo" name="modelo" required>
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" required>
+
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+
+            <button type="submit">Agendar</button>
+        </form>
+
+        <!--
+        <h2>Agenda</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-agenda">
+                As linhas vão ser preenchidas via JavaScript
+            </tbody>
+        </table>
+        -->
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

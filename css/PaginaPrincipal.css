@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #1915f8f3, #dfdc16e8);
+    background-position: center;
+    background-size: cover;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border: 2px solid #fff;
+    padding: 10px;
+}
+
+header nav ul {
+    font-size: 18 px;
+    display: flex;
+    gap: 6rem;
+}
+
+header nav ul li {
+    position: relative;
+    padding: 5px 0;
+}
+
+header nav ul li a{
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.5s ease, font-weight 0.5s ease;
+}
+
+header nav ul li a:hover{
+    color: #000;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="text"]{
+  color: #ffffffc0;
+  background-color: transparent;
+}
+
+label{
+    color: #ffffff;
+}
+input, button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th {
+    background-color: #f0f0f0;
+}
