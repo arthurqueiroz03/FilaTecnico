@@ -21,6 +21,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+document.querySelectorAll('.editavel').forEach(cell => {
+    cell.addEventListener('blur', function () {
+        const id = this.dataset.id;
+        const campo = this.dataset.campo;
+        const valor = this.textContent.trim();
+
+        fetch(`/editar/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ campo, valor })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Erro ao salvar");
+        })
+        .catch(err => {
+            alert("Erro ao salvar alteração.");
+            console.error(err);
+        });
+    });
+});
+
   // Submissão do formulário
   if (form) {
     form.addEventListener('submit', function(event) {

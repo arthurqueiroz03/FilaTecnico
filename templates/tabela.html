@@ -11,28 +11,28 @@
 
 <body>
     <header>
-    <nav>
-        <ul>
-            <li><a id="agendar" href="/">Agendar um Atendimento</a></li>
-            <li class="direita"><a id="consultar" href="/tabela">Consultar Atendimentos</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav>
+            <ul>
+                <li><a id="agendar" href="/">Agendar um Atendimento</a></li>
+                <li class="direita"><a id="consultar" href="/tabela">Consultar Atendimentos</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="filtros">
-        
-    <input type="text" id="pesquisa" placeholder="Buscar por OS, nome..." />
-    <form method="get" action="/tabela">
-        <label for="semana">Escolha a semana:</label>
-        <select name="semana" id="semana" onchange="this.form.submit()">
-            {% for s in semanas_disponiveis %}
-            {% set s_fim = s + timedelta(days=4) %}
-            <option value="{{ s.strftime('%Y-%m-%d') }}" {% if semana==s.strftime('%Y-%m-%d') %}selected{% endif %}>
-                Semana {{ s.strftime('%d/%m') }} - {{ s_fim.strftime('%d/%m') }}
-            </option>
-            {% endfor %}
-        </select>
-    </form>
+
+        <input type="text" id="pesquisa" placeholder="Buscar por OS, nome..." />
+        <form method="get" action="/tabela">
+            <label for="semana">Escolha a semana:</label>
+            <select name="semana" id="semana" onchange="this.form.submit()">
+                {% for s in semanas_disponiveis %}
+                {% set s_fim = s + timedelta(days=4) %}
+                <option value="{{ s.strftime('%Y-%m-%d') }}" {% if semana==s.strftime('%Y-%m-%d') %}selected{% endif %}>
+                    Semana {{ s.strftime('%d/%m') }} - {{ s_fim.strftime('%d/%m') }}
+                </option>
+                {% endfor %}
+            </select>
+        </form>
     </div>
 
     <table border="1" id="tabela">
@@ -45,6 +45,7 @@
                 <th>Modelo</th>
                 <th>Hora</th>
                 <th>Tipo</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
@@ -63,14 +64,16 @@
                 <td rowspan="{{ ags | length }}">{{ dia.strftime('%d/%m') }}</td>
                 {% endif %}
 
-                <td>{{ ag.os }}</td>
-                <td>
-                    {{ ag.cliente }}
-                    <button class="btn-apagar" data-id="{{ ag.id }}">x</button>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="os">{{ ag.os }}</td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="cliente">{{ ag.cliente }}
                 </td>
-                <td>{{ ag.modelo }}</td>
-                <td>{{ ag.hora }}</td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="modelo">{{ ag.modelo }}
+                </td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="hora">{{ ag.hora }}</td>
                 <td>{{ ag.tipo }}</td>
+                <td>
+                    <button class="btn-apagar" data-id="{{ ag.id }}">X</button>
+                </td>
             </tr>
             {% endfor %}
             {% else %}
@@ -79,7 +82,7 @@
                     {{ tecnico }}
                 </td>
                 <td>{{ dia.strftime('%d/%m') }}</td>
-                <td colspan="5">vazio</td>
+                <td colspan="6">vazio</td>
             </tr>
             {% endif %}
             {% endfor %}

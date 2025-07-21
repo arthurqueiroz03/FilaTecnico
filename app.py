@@ -87,12 +87,12 @@ def mostrar_agendamentos():
     dias_semana = [inicio_semana.date() + timedelta(days=i) for i in range(5)]  # segunda a sexta
 
     tecnicos = [
-        "Roney Passos",
-        "Lucas Queiroz",
-        "Jonatas Jesus",
-        "Marcelo Garandy",
-        "Fabricio Pimentel",
-        "Jonas Soares"
+        "RONEY PASSOS",
+        "LUCAS QUEIROZ",
+        "JONATAS JESUS",
+        "MARCELO GARANDY",
+        "FABRICIO PIMENTEL",
+        "JONAS SOARES"
     ]
 
     conn = conectar_bd()
@@ -130,6 +130,26 @@ def apagar_agendamento(id):
     c.execute('DELETE FROM agendamentos WHERE id = ?', (id,))
     conn.commit()
     conn.close()
+    return '', 204
+
+@app.route('/editar/<int:id>', methods=['POST'])
+def editar_agendamento(id):
+    data = request.get_json()
+    campo = data.get('campo')
+    valor = data.get('valor')
+
+    campos_validos = {'cliente', 'modelo', 'hora', 'tecnico', 'data', 'os', 'tipo'}
+    if campo not in campos_validos:
+        return "Campo inválido", 400
+
+    conn = conectar_bd()
+    cursor = conn.cursor()
+    cursor.execute(f'''
+        UPDATE agendamentos SET {campo} = ? WHERE id = ?
+    ''', (valor, id))
+    conn.commit()
+    conn.close()
+
     return '', 204
 
 if __name__ == '__main__':

@@ -1,17 +1,23 @@
 .container {
     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza exato no meio */
+    
     display: flex;
     flex-direction: column;
-    left: 60vh;
+    
     width: 90vh;
- 
-    margin: 28px auto;
+    margin: 0 auto;
     padding: 20px;
+    
     border-radius: 12px;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    /*border: 2px solid rgba(255, 255, 255, .2);  --  MAIS CLARO*/
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 
 h1 {
     text-align: center;
@@ -33,6 +39,12 @@ input[type="text"] {
 
 label {
     color: #ffffff;
+}
+
+input[type="date"],
+input[type="time"] {
+    
+    color-scheme: dark; /* força aparência escura */
 }
 
 input,
@@ -57,9 +69,9 @@ button:hover {
 
 select {
     background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 1px solid #ccc;
     /* cor da borda */
-    color: #333;
+    color: #929292;
     /* cor da fonte */
     padding: 8px 12px;
     border-radius: 6px;
