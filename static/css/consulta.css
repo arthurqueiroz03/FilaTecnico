@@ -1,3 +1,17 @@
+
+.filtros {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* espaço entre os elementos */
+    margin-top: 50px; /* ajuste conforme a altura do seu header */
+    flex-wrap: wrap; /* se ficar apertado na tela pequena, quebra linha */
+    z-index: 99999;
+}
+
+
+
 input[type="text"]{
     color: #ffffffc0;
     background-color: transparent;
@@ -8,14 +22,28 @@ input{
     font-size: 1rem;
     border-radius: 6px;
     border: 1px solid #ccc;
-    position: fixed;
-    margin-left: 84vh;
+    top: 2vh;
+    z-index: 9998;
+}
+
+label{
+    display: none;
+}
+
+select{
+    padding: 10px 100px 10px 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+
     top: 2vh;
     z-index: 9999;
+    background-color: #ccc;
+    appearance: none; 
 }
 
 table {
-    margin-top: 10vh;
+    margin-top: 1vh;
     margin-left: 2vh;
     width: 98%;
     border-collapse: collapse;
@@ -34,4 +62,52 @@ th, td {
 
 th {
     background-color: transparent;
+}
+
+.btn-apagar {
+    background-color: transparent;
+    padding: 5px;
+    float: right;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn-apagar:hover{
+    cursor: pointer;
+}
+
+.garantia{
+    background-color: rgba(0, 255, 13, 0.2);
+}
+.avulso{
+    background-color: rgba(255, 0, 0, 0.2);
+}
+.remoto{
+    background-color: rgba(17, 0, 255, 0.2);
+}
+
+/* Cores únicas por técnico */
+.tecnico-roney-passos {
+    background-color: #3b82f6;  /* azul */
+}
+
+.tecnico-lucas-queiroz {
+    background-color: #10b981;  /* verde */
+}
+
+.tecnico-jonatas-jesus {
+    background-color: #f59e0b;  /* amarelo */
+}
+
+.tecnico-marcelo-garandy {
+    background-color: #ef4444;  /* vermelho */
+}
+
+.tecnico-fabricio-pimentel {
+    background-color: #8b5cf6;  /* roxo */
+}
+
+.tecnico-jonas-soares {
+    background-color: #14b8a6;  /* ciano */
 }

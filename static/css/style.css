@@ -18,17 +18,13 @@ header{
     width: 100vw;
     top: 0;
     padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 999;
+    z-index: 10;
 }
 
 header nav ul {
-    font-size: 18 px;
     display: flex;
     justify-content: space-between;
-    gap: 60rem;
+    padding: 0;
 }
 
 header nav ul li {
@@ -57,4 +53,8 @@ header nav ul li::after {
 
 header nav ul li:hover::after {
     width: 100%;
+}
+
+header nav ul .direita {
+    margin-left: auto;
 }

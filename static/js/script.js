@@ -4,20 +4,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const botaoOk = document.getElementById('ok');
 
   // Apagar agendamento ao clicar na linha da tabela
-  document.querySelectorAll('table tbody tr').forEach(row => {
-    row.addEventListener('click', function () {
+  document.querySelectorAll('.btn-apagar').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      event.stopPropagation(); // evita clique no pai
       const id = this.dataset.id;
       if (confirm("Deseja realmente apagar esse agendamento?")) {
-        fetch(`/apagar/${id}`, {
-          method: 'POST'
-        })
-        .then(response => {
-          if (response.ok) {
-            this.remove();
-          } else {
-            alert('Erro ao apagar agendamento.');
-          }
-        });
+        fetch(`/apagar/${id}`, { method: 'POST' })
+          .then(response => {
+            if (response.ok) {
+              this.closest('.agendamento').remove();
+            } else {
+              alert('Erro ao apagar agendamento.');
+            }
+          });
       }
     });
   });

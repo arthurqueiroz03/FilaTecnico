@@ -15,13 +15,13 @@
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a id="agendar" href="http://127.0.0.1:5000">Agendar um Atendimento</a></li>
-                <li><a id="consultar" href="http://127.0.0.1:5000/tabela">Consultar Atendimentos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a id="agendar" href="/">Agendar um Atendimento</a></li>
+            <li class="direita"><a id="consultar" href="/tabela">Consultar Atendimentos</a></li>
+        </ul>
+    </nav>
+</header>
     <div class="container">
         <form action="/agendar" method="POST" id="form-agendamento">
 
@@ -41,7 +41,15 @@
             <input type="time" id="hora" name="hora" required>
 
             <label for="tecnico">Técnico:</label>
-            <input type="text" id="tecnico" name="tecnico" required>
+            <select name="tecnico" id="tecnico" required>
+                <option value="">Selecione</option>
+                <option value="Roney Passos">Roney Passos</option>
+                <option value="Lucas Queiroz">Lucas Queiroz</option>
+                <option value="Jonatas Jesus">Jonatas Jesus</option>
+                <option value="Marcelo Garandy">Marcelo Garandy</option>
+                <option value="Fabricio Pimentel">Fabricio Pimentel</option>
+                <option value="Jonas Soares">Jonas Soares</option>
+            </select>
             
             <label for="tipo">Tipo de Atendimento:</label>
             <select name="tipo" id="tipo" required>
