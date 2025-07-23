@@ -4,9 +4,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; /* espaço entre os elementos */
-    margin-top: 50px; /* ajuste conforme a altura do seu header */
-    flex-wrap: wrap; /* se ficar apertado na tela pequena, quebra linha */
+    gap: 30px;
+    margin-top: 50px; 
+    flex-wrap: wrap; 
     z-index: 99999;
 }
 
