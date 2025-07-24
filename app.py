@@ -35,8 +35,6 @@ def obter_semanas_disponiveis():
 app = Flask(__name__)
 
 def conectar_bd():
-    caminho = os.path.abspath('agendamentos.db')
-    print(f'>> Conectando ao banco em: {caminho}')
     return sqlite3.connect('agendamentos.db')
 
 from datetime import datetime, date

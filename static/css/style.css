@@ -10,7 +10,7 @@ body {
     background: url('/static/img/wallpapersden.com_minimal-hd-landscape_1920x1080.jpg');
     background-size: cover;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 header{

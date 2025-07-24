@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Apagar agendamento ao clicar na linha da tabela
   document.querySelectorAll('.btn-apagar').forEach(btn => {
     btn.addEventListener('click', function (event) {
-      event.stopPropagation(); // evita clique no pai
+      event.stopPropagation();
       const id = this.dataset.id;
       if (confirm("Deseja realmente apagar esse agendamento?")) {
         fetch(`/apagar/${id}`, { method: 'POST' })
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  //Editar diretamente na linha
 document.querySelectorAll('.editavel').forEach(cell => {
     cell.addEventListener('blur', function () {
         const id = this.dataset.id;
@@ -47,7 +48,7 @@ document.querySelectorAll('.editavel').forEach(cell => {
   // Submissão do formulário
   if (form) {
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // ← Importante! Para evitar recarregar a página
+      event.preventDefault();
       const formData = new FormData(form);
 
       fetch('/agendar', {
