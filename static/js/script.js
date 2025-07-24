@@ -45,6 +45,30 @@ document.querySelectorAll('.editavel').forEach(cell => {
     });
 });
 
+document.querySelectorAll('tr').forEach(row => {
+    row.addEventListener('click', function () {
+        const cell = row.querySelector('.editavel');
+        if (!cell) return;
+
+        const id = cell.dataset.id;
+        if (!id) return;
+
+        fetch(`/agendamento_info/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                alert(
+                    `Feito por: ${data.criado_por || 'N/A'}\n` +
+                    `Alterado por: ${data.alterado_por || 'N/A'}\n` +
+                    `Em: ${data.alterado_em || 'N/A'}`
+                );
+            })
+            .catch(err => {
+                alert("Erro ao buscar informações do agendamento.");
+                console.error(err);
+            });
+    });
+});
+
   // Submissão do formulário
   if (form) {
     form.addEventListener('submit', function(event) {

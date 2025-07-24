@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, make_response
+from flask import Flask, render_template, request, redirect, url_for, session, make_response, jsonify
 from datetime import datetime, timedelta, date
 from collections import defaultdict
 import sqlite3
@@ -84,13 +84,16 @@ def agendar():
         hora = request.form['hora']
         tipo = request.form['tipo']
         tecnico = request.form['tecnico']
+        criado_por = session.get('usuario')
+        alterado_por = criado_por
+        alterado_em = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         conn = sqlite3.connect('agendamentos.db')
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO agendamentos (os, cliente, modelo, data, hora, tipo, tecnico)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (os, cliente, modelo, data, hora, tipo, tecnico))
+            INSERT INTO agendamentos (os, cliente, modelo, data, hora, tipo, tecnico, criado_por, alterado_por, alterado_em)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (os, cliente, modelo, data, hora, tipo, tecnico, criado_por, alterado_por, alterado_em))
         conn.commit()
         conn.close()
 
@@ -174,9 +177,12 @@ def apagar_agendamento(id):
 def editar_agendamento(id):
     if session.get('tipo') != 'editor':
         return "Acesso restrito", 403
+
     data = request.get_json()
     campo = data.get('campo')
     valor = data.get('valor')
+    usuario = session.get('usuario')
+    agora = datetime.now().strftime('%d/%m/%Y %H:%M')
 
     campos_validos = {'cliente', 'modelo', 'hora', 'tecnico', 'data', 'os', 'tipo'}
     if campo not in campos_validos:
@@ -185,12 +191,33 @@ def editar_agendamento(id):
     conn = conectar_bd()
     cursor = conn.cursor()
     cursor.execute(f'''
-        UPDATE agendamentos SET {campo} = ? WHERE id = ?
-    ''', (valor, id))
+        UPDATE agendamentos 
+        SET {campo} = ?, alterado_por = ?, alterado_em = ? 
+        WHERE id = ?
+    ''', (valor, usuario, agora, id))
     conn.commit()
     conn.close()
 
     return '', 204
+
+@app.route('/agendamento_info/<int:id>')
+def agendamento_info(id):
+    conn = conectar_bd()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT criado_por, alterado_por, alterado_em FROM agendamentos WHERE id = ?
+    ''', (id,))
+    row = cursor.fetchone()
+    conn.close()
+
+    if row:
+        return jsonify({
+            'criado_por': row[0],
+            'alterado_por': row[1],
+            'alterado_em': row[2]
+        })
+    else:
+        return jsonify({'erro': 'Agendamento não encontrado'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)

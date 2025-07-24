@@ -26,7 +26,14 @@ conn.execute('''
     )
 ''')
 
+cursor = conn.cursor()
+cursor.execute("ALTER TABLE agendamentos ADD COLUMN criado_por TEXT")
+cursor.execute("ALTER TABLE agendamentos ADD COLUMN alterado_por TEXT")
+cursor.execute("ALTER TABLE agendamentos ADD COLUMN alterado_em TEXT")
+
 conn.commit()
 conn.close()
+
+
 
 print("Banco de dados criado com sucesso!")
