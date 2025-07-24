@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticação</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="container">
+        <form method="POST" action="/login">
+            <h1>Autenticação</h1>
+
+            <div class="input-box">
+                <input placeholder="Usuário" type="text" name="usuario" required>
+                <i class="bx bxs-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input placeholder="Senha" type="password" name="senha" required>
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+
+            <div class="caixinha">
+                <label>
+                    <input type="checkbox" name="manter_logado">
+                    Manter logado
+                </label>
+            </div>
+
+            <button type="submit" id="logar">Log in</button>
+
+            <div class="registrar">
+                <p><a href="/">Entrar sem uma conta (apenas visualização)</a></p>
+            </div>
+
+            {% if erro %}
+            <p style="color: red;">{{ erro }}</p>
+            {% endif %}
+        </form>
+    </main>
+</body>
+
+</html>

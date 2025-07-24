@@ -3,69 +3,93 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Agendar um Atendimento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/PaginaPrincipal.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/consulta.css">
+    <title>Consulta de atendimentos</title>
 </head>
 
 <body>
     <header>
-    <nav>
-        <ul>
-            <li><a id="agendar" href="/">Agendar um Atendimento</a></li>
-            <li class="direita"><a id="consultar" href="/tabela">Consultar Atendimentos</a></li>
-        </ul>
-    </nav>
-</header>
-    <div class="container">
-        <form action="/agendar" method="POST" id="form-agendamento">
+        <nav>
+            <ul>
+                <li><a id="agendar" href="/agendar">Agendar um Atendimento</a></li>
+                <li class="direita"><a id="consultar" href="/">Consultar Atendimentos</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <label for="os">Nº da O.S.:</label>
-            <input type="text" id="os" name="os">
+    <div class="filtros">
 
-            <label for="cliente">Nome do Cliente/Empresa:</label>
-            <input type="text" id="cliente" name="cliente" required>
-
-            <label for="modelo">Modelo da Máquina:</label>
-            <input type="text" id="modelo" name="modelo">
-
-            <label for="data">Data:</label>
-            <input type="date" id="data" name="data" required>
-
-            <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora">
-
-            <label for="tecnico">Técnico:</label>
-            <select name="tecnico" id="tecnico" required>
-                <option value="">Selecione</option>
-                <option value="RONEY PASSOS">Roney Passos</option>
-                <option value="LUCAS QUEIROZ">Lucas Queiroz</option>
-                <option value="JONATAS JESUS">Jonatas Jesus</option>
-                <option value="MARCELO GARANDY">Marcelo Garandy</option>
-                <option value="FABRICIO PIMENTEL">Fabricio Pimentel</option>
-                <option value="JONAS SOARES">Jonas Soares</option>
+        <input type="text" id="pesquisa" placeholder="Buscar por OS, nome..." />
+        <form method="get" action="/">
+            <label for="semana">Escolha a semana:</label>
+            <select name="semana" id="semana" onchange="this.form.submit()">
+                {% for s in semanas_disponiveis %}
+                {% set s_fim = s + timedelta(days=4) %}
+                <option value="{{ s.strftime('%Y-%m-%d') }}" {% if semana==s.strftime('%Y-%m-%d') %}selected{% endif %}>
+                    Semana {{ s.strftime('%d/%m') }} - {{ s_fim.strftime('%d/%m') }}
+                </option>
+                {% endfor %}
             </select>
-            
-            <label for="tipo">Tipo de Atendimento:</label>
-            <select name="tipo" id="tipo" required>
-                <option value="">Selecione</option>
-                <option value="garantia">Garantia</option>
-                <option value="avulso">Avulso</option>
-                <option value="remoto">Remoto</option>
-            </select>
-
-            <button type="submit">Agendar</button>
         </form>
     </div>
-    <div id="msg-sucesso">
-        Agendamento feito com sucesso!
-        <button id="ok">OK</button>
-    </div>
+
+    <table border="1" id="tabela">
+        <thead>
+            <tr>
+                <th>Técnico</th>
+                <th>Data</th>
+                <th>OS</th>
+                <th>Cliente</th>
+                <th>Modelo</th>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tecnico in tecnicos %}
+            {% for dia in dias_semana %}
+            {% set ags = agendamentos[tecnico][dia] %}
+            {% if ags %}
+            {% for ag in ags %}
+            <tr class="{{ ag.tipo | lower }}">
+                <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
+                    {{ tecnico }}
+                </td>
+
+                {# Mostra a data apenas na primeira linha do dia #}
+                {% if loop.index0 == 0 %}
+                <td rowspan="{{ ags | length }}">{{ dia.strftime('%d/%m') }}</td>
+                {% endif %}
+
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="os">{{ ag.os }}</td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="cliente">{{ ag.cliente }}
+                </td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="modelo">{{ ag.modelo }}
+                </td>
+                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="hora">{{ ag.hora }}</td>
+                <td>{{ ag.tipo }}</td>
+                <td>
+                    <button class="btn-apagar" data-id="{{ ag.id }}">X</button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr class="vazio">
+                <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
+                    {{ tecnico }}
+                </td>
+                <td>{{ dia.strftime('%d/%m') }}</td>
+                <td colspan="6">vazio</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 

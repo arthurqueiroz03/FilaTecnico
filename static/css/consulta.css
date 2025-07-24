@@ -13,7 +13,7 @@
 
 
 input[type="text"]{
-    color: #ffffffc0;
+    color: #ffffff;
     background-color: transparent;
 }
 
@@ -24,6 +24,10 @@ input{
     border: 1px solid #ccc;
     top: 2vh;
     z-index: 9998;
+}
+
+input::placeholder{
+    color: #ccc;
 }
 
 label{
@@ -58,7 +62,7 @@ thead{
 }
 
 th, td {
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     padding: 10px;
 }
 
@@ -78,14 +82,20 @@ th {
     cursor: pointer;
 }
 
+
+
 .garantia{
-    background-color: rgba(0, 255, 13, 0.2);
+    background-color: rgb(0, 170, 0);
 }
 .avulso{
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgb(202, 1, 1);
 }
 .remoto{
-    background-color: rgba(17, 0, 255, 0.2);
+    background-color: rgb(2, 2, 206);
+}
+
+.vazio{
+    background-color: #7e7575;
 }
 
 /* Cores únicas por técnico */

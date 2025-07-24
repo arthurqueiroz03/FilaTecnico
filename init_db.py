@@ -1,6 +1,5 @@
 import sqlite3
 
-# Cria o banco (ou conecta, se já existir)
 conn = sqlite3.connect('agendamentos.db')
 
 # Cria a tabela
@@ -14,6 +13,16 @@ conn.execute('''
         hora TEXT NOT NULL,
         tipo TEXT NOT NULL,
         tecnico TEXT NOT NULL
+    )
+''')
+
+# Cria a tabela de usuários
+conn.execute('''
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL UNIQUE,
+        senha TEXT NOT NULL,
+        tipo TEXT NOT NULL  -- 'usuario' ou 'editor'
     )
 ''')
 

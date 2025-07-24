@@ -7,17 +7,16 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('/static/img/wallpapersden.com_minimal-hd-landscape_1920x1080.jpg');
+    /*background: url('/static/img/wallpapersden.com_minimal-hd-landscape_1920x1080.jpg');*/
+    background-color: #0004ffd5;
     background-size: cover;
-    overflow-y: auto;
-    overflow-x: auto;
 }
 
 header{
-    position: fixed;
+    position: relative;
     width: 100vw;
     top: 0;
-    padding: 20px 50px;
+    padding: 20px 10px;
     z-index: 10;
 }
 
