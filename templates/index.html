@@ -26,6 +26,7 @@
     <div class="filtros">
 
         <input type="text" id="pesquisa" placeholder="Buscar por OS, nome..." />
+
         <form method="get" action="/">
             <label for="semana">Escolha a semana:</label>
             <select name="semana" id="semana" onchange="this.form.submit()">
@@ -37,6 +38,29 @@
                 {% endfor %}
             </select>
         </form>
+
+        <div class="legenda">
+            <div class="leg">
+                <p>Garantia:</p>
+                <div class="verde"></div>
+            </div>
+
+            <div class="leg">
+                <p>Avulso:</p>
+                <div class="vermelho"></div>
+            </div>
+
+            <div class="leg">
+                <p>Remoto:</p>
+                <div class="azul"></div>
+            </div>
+
+            <div class="leg">
+                <p>Presencial:</p>
+                <div class="laranja"></div>
+            </div>
+        </div>
+
     </div>
 
     <table border="1" id="tabela">
