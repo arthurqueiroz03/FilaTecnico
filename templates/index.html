@@ -77,9 +77,11 @@
                 <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="hora">{{ ag.hora }}</td>
                 <td>{{ ag.tipo }}</td>
                 <td>
-                    <span class="material-symbols-outlined">
-                        history
-                    </span>
+                    <button class="historico" data-id="{{ ag.id }}">
+                        <span class="material-symbols-outlined">
+                            history
+                        </span>
+                    </button>
                 </td>
                 <td>
                     <button class="btn-apagar" data-id="{{ ag.id }}"><span class="material-symbols-outlined">
@@ -101,6 +103,20 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="fundopreto">
+        <div id="caixahistorico">
+
+            <h3>Histórico</h3>
+
+            <div class="infos">
+                <p id="info-criado"></p>
+                <p id="info-alterado"></p>
+                <p id="info-alterado-em"></p>
+                <button id="fechar">Fechar</button>
+            </div>
+
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

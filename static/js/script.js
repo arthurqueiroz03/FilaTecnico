@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form-agendamento');
   const msgSucesso = document.getElementById('msg-sucesso');
   const botaoOk = document.getElementById('ok');
+  const okok = document.getElementById('fechar');
 
   // Apagar agendamento ao clicar na linha da tabela
   document.querySelectorAll('.btn-apagar').forEach(btn => {
@@ -45,22 +46,28 @@ document.querySelectorAll('.editavel').forEach(cell => {
     });
 });
 
-document.querySelectorAll('tr').forEach(row => {
-    row.addEventListener('click', function () {
-        const cell = row.querySelector('.editavel');
-        if (!cell) return;
+// histórico 
+document.querySelectorAll('.historico').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+        event.stopPropagation();
 
-        const id = cell.dataset.id;
+        const id = this.dataset.id;
         if (!id) return;
 
         fetch(`/agendamento_info/${id}`)
             .then(res => res.json())
             .then(data => {
-                alert(
-                    `Feito por: ${data.criado_por || 'N/A'}\n` +
-                    `Alterado por: ${data.alterado_por || 'N/A'}\n` +
-                    `Em: ${data.alterado_em || 'N/A'}`
-                );
+                const popup = document.getElementById('caixahistorico');
+
+                document.getElementById('info-criado').textContent = `Feito por: ${data.criado_por || 'N/A'}`;
+                document.getElementById('info-alterado').textContent = `Alterado por: ${data.alterado_por || 'N/A'}`;
+                document.getElementById('info-alterado-em').textContent = `Em: ${data.alterado_em || 'N/A'}`;
+
+                // Posiciona o popup próximo ao botão clicado
+                const rect = btn.getBoundingClientRect();
+                popup.style.top = `${rect.bottom + window.scrollY + 5}px`; // 5px abaixo do botão
+                popup.style.left = `${rect.left + window.scrollX -200}px`;
+                popup.style.display = 'block';
             })
             .catch(err => {
                 alert("Erro ao buscar informações do agendamento.");
@@ -68,6 +75,12 @@ document.querySelectorAll('tr').forEach(row => {
             });
     });
 });
+
+if (fechar) {
+    fechar.addEventListener('click', function() {
+      caixahistorico.style.display = 'none';
+    });
+  }
 
   // Submissão do formulário
   if (form) {

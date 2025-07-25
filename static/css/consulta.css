@@ -1,23 +1,22 @@
-
 .filtros {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
-    margin-top: 50px; 
-    flex-wrap: wrap; 
+    margin-top: 50px;
+    flex-wrap: wrap;
     z-index: 99999;
 }
 
 
 
-input[type="text"]{
+input[type="text"] {
     color: #ffffff;
     background-color: transparent;
 }
 
-input{
+input {
     padding: 10px 100px 10px 10px;
     font-size: 1rem;
     border-radius: 6px;
@@ -26,15 +25,15 @@ input{
     z-index: 9998;
 }
 
-input::placeholder{
+input::placeholder {
     color: #ccc;
 }
 
-label{
+label {
     display: none;
 }
 
-select{
+select {
     padding: 10px 100px 10px 10px;
     font-size: 1rem;
     border-radius: 6px;
@@ -43,7 +42,7 @@ select{
     top: 2vh;
     z-index: 9999;
     background-color: #ccc;
-    appearance: none; 
+    appearance: none;
 }
 
 table {
@@ -57,11 +56,12 @@ table {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-thead{
+thead {
     background-color: #000000;
 }
 
-th, td {
+th,
+td {
     border: 2px solid #ccc;
     padding: 10px;
 }
@@ -70,7 +70,7 @@ th {
     background-color: transparent;
 }
 
-.material-symbols-outlined:hover{
+.material-symbols-outlined:hover {
     cursor: pointer;
 }
 
@@ -82,47 +82,104 @@ th {
     height: 100%;
 }
 
-.btn-apagar:hover{
+.btn-apagar:hover {
+    cursor: pointer;
+}
+
+.historico {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.historico:hover {
     cursor: pointer;
 }
 
 
+#caixahistorico {
+    display: none;
+    position: absolute;
+    color: #000;
+    padding: 35px;
+    border-radius: 12px;
+    background-color: #fff;
+    z-index: 999;
+    height: auto;
+    width: 30vw;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    text-align: center;
+}
 
-.garantia{
+#fechar{
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 1.5rem;
+}
+
+#fechar:hover{
+    background-color: #0057b4;
+}
+
+h3{
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.garantia {
     background-color: rgb(0, 170, 0);
 }
-.avulso{
+
+.avulso {
     background-color: rgb(202, 1, 1);
 }
-.remoto{
+
+.remoto {
     background-color: rgb(2, 2, 206);
 }
 
-.vazio{
+.vazio {
     background-color: #7e7575;
 }
 
 /* Cores únicas por técnico */
 .tecnico-roney-passos {
-    background-color: #3b82f6;  /* azul */
+    background-color: #3b82f6;
+    /* azul */
 }
 
 .tecnico-lucas-queiroz {
-    background-color: #10b981;  /* verde */
+    background-color: #10b981;
+    /* verde */
 }
 
 .tecnico-jonatas-jesus {
-    background-color: #f59e0b;  /* amarelo */
+    background-color: #f59e0b;
+    /* amarelo */
 }
 
 .tecnico-marcelo-garandy {
-    background-color: #ef4444;  /* vermelho */
+    background-color: #ef4444;
+    /* vermelho */
 }
 
 .tecnico-fabricio-pimentel {
-    background-color: #8b5cf6;  /* roxo */
+    background-color: #8b5cf6;
+    /* roxo */
 }
 
 .tecnico-jonas-soares {
-    background-color: #14b8a6;  /* ciano */
+    background-color: #14b8a6;
+    /* ciano */
 }
