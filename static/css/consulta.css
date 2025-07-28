@@ -9,6 +9,19 @@
     z-index: 99999;
 }
 
+#copiar{
+    border-radius: 10px;
+    border: none;
+    width: 150px;
+    height: 40px;
+    background-color: #ccc;
+}
+
+#copiar:hover{
+    cursor: pointer;
+    background-color: #9b9b9b;
+}
+
 .legenda {
     position: relative;
     display: flex;

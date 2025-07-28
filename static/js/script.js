@@ -114,6 +114,82 @@ if (fechar) {
     });
   }
 
+ //Copiar agenda
+document.getElementById('copiar').addEventListener('click', function () {
+    const linhas = document.querySelectorAll('tr');
+
+    const todasDatas = Array.from(document.querySelectorAll('td'))
+        .filter(td => /^\d{2}\/\d{2}$/.test(td.textContent.trim()))
+        .map(td => td.textContent.trim());
+
+    const datasUnicas = [...new Set(todasDatas)];
+
+    const inicio = datasUnicas[0] || '??/??';
+    const fim = datasUnicas[datasUnicas.length - 1] || '??/??';
+
+    let textoFinal = `AGENDA SEMANA ${inicio} A ${fim}\n\n`;
+
+    const tecnicoAgendas = {};
+
+    linhas.forEach(row => {
+        const tds = row.querySelectorAll('td');
+        if (tds.length === 0) return;
+
+        const nomeTecnico = tds[0]?.textContent.trim();
+        const data = tds[1]?.textContent.trim();
+        const os = tds[2]?.textContent.trim();
+        const cliente = tds[3]?.textContent.trim();
+        const modelo = tds[4]?.textContent.trim();
+        const hora = tds[5]?.textContent.trim();
+        const tipo = tds[6]?.textContent.trim();
+
+        if (!nomeTecnico) return;
+
+        if (!tecnicoAgendas[nomeTecnico]) {
+            tecnicoAgendas[nomeTecnico] = {};
+        }
+
+        if (data && (hora || os || cliente || modelo || tipo)) {
+            const partes = [];
+            if (hora) partes.push(hora);
+            if (os) partes.push(os);
+            if (cliente) partes.push(cliente);
+            if (modelo) partes.push(`(${modelo})`);
+            if (tipo) partes.push(tipo);
+
+            const descricao = partes.join(' ').trim();
+
+            if (!tecnicoAgendas[nomeTecnico][data]) {
+                tecnicoAgendas[nomeTecnico][data] = [];
+            }
+
+            tecnicoAgendas[nomeTecnico][data].push(descricao);
+        }
+    });
+
+    for (const tecnico in tecnicoAgendas) {
+        textoFinal += `${tecnico.toUpperCase()}\n`;
+
+        datasUnicas.forEach(data => {
+            const atividades = tecnicoAgendas[tecnico][data];
+            if (atividades && atividades.length > 0) {
+                textoFinal += `${data} - ${atividades.join(' / ')}\n`;
+            } else {
+                textoFinal += `${data} -\n`;
+            }
+        });
+
+        textoFinal += '\n';
+    }
+
+    navigator.clipboard.writeText(textoFinal).then(() => {
+        alert("Agenda copiada com sucesso!");
+    }).catch(err => {
+        alert("Erro ao copiar agenda.");
+        console.error(err);
+    });
+});
+
   // Filtro de pesquisa na tabela
   const campoPesquisa = document.getElementById('pesquisa');
   if (campoPesquisa) {
