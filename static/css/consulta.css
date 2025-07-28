@@ -14,7 +14,7 @@
     border: none;
     width: 150px;
     height: 40px;
-    background-color: #ccc;
+    background-color: #fff;
 }
 
 #copiar:hover{
@@ -86,7 +86,7 @@ input {
 }
 
 input::placeholder {
-    color: #ccc;
+    color: #fff;
 }
 
 label {
@@ -101,7 +101,7 @@ select {
 
     top: 2vh;
     z-index: 9999;
-    background-color: #ccc;
+    background-color: #fff;
     appearance: none;
 }
 
@@ -221,7 +221,7 @@ h3{
 }
 
 .remoto {
-    background-color: rgb(2, 2, 206);
+    background-color: rgb(2, 2, 172);
 }
 
 .presencial {
