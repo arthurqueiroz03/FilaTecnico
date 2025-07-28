@@ -52,6 +52,12 @@
     height: 10px;
 }
 
+.roxo{
+    background-color: darkorchid;
+    width: 10px;
+    height: 10px;
+}
+
 input[type="text"] {
     color: #ffffff;
     background-color: transparent;
@@ -192,6 +198,10 @@ h3{
 
 .presencial {
     background-color: chocolate;
+}
+
+.interno {
+    background-color: darkorchid;
 }
 
 .vazio {
