@@ -218,6 +218,59 @@ def agendamento_info(id):
         })
     else:
         return jsonify({'erro': 'Agendamento não encontrado'}), 404
+    
+@app.route("/api/copiar-agenda")
+def copiar_agenda():
+    semana = request.args.get("semana")  # formato esperado: "21/07"
+    if not semana:
+        return {"erro": "Semana não informada"}, 400
+
+    # Converte para data de início
+    dia, mes = map(int, semana.split("/"))
+    ano = datetime.now().year
+    data_inicio = datetime(ano, mes, dia).date()
+    datas_semana = [(data_inicio + timedelta(days=i)) for i in range(5)]
+    datas_str = [d.strftime("%Y-%m-%d") for d in datas_semana]
+    datas_formatadas = [d.strftime("%d/%m") for d in datas_semana]
+
+    # Lista fixa e ordenada de técnicos que você quer exibir
+    tecnicos = [
+        "RONEY PASSOS",
+        "LUCAS QUEIROZ",
+        "JONATAS JESUS",
+        "MARCELO GARANDY",
+        "FABRICIO PIMENTEL",
+        "JONAS SOARES"
+    ]
+
+    conn = conectar_bd()
+    cursor = conn.cursor()
+
+    resposta = {
+        "inicio": datas_formatadas[0],
+        "fim": datas_formatadas[-1],
+        "agenda": {}
+    }
+
+    for tecnico in tecnicos:
+        resposta["agenda"][tecnico] = {}
+        for data_sqlite, data_humana in zip(datas_str, datas_formatadas):
+            cursor.execute('''
+                SELECT hora, cliente, modelo, tipo 
+                FROM agendamentos 
+                WHERE tecnico = ? AND data = ?
+                ORDER BY hora
+            ''', (tecnico, data_sqlite))
+            ags = cursor.fetchall()
+            itens = [f"{hora} {cliente} ({modelo}) {tipo}" for hora, cliente, modelo, tipo in ags]
+            resposta["agenda"][tecnico][data_humana] = " / ".join(itens) if itens else ""
+
+    conn.close()
+    return jsonify(resposta)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
