@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/consulta.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=cancel" />
     <link rel="stylesheet"
@@ -70,70 +75,76 @@
 
     </div>
 
-    <table border="1" id="tabela">
-        <thead>
-            <tr>
-                <th>Técnico</th>
-                <th>Data</th>
-                <th>OS</th>
-                <th>Cliente</th>
-                <th>Modelo</th>
-                <th>Hora</th>
-                <th>Tipo</th>
-                <th>Histórico</th>
-                <th>Excluir</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for tecnico in tecnicos %}
-            {% for dia in dias_semana %}
-            {% set ags = agendamentos[tecnico][dia] %}
-            {% if ags %}
-            {% for ag in ags %}
-            <tr class="{{ ag.tipo | lower }}">
-                <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
-                    {{ tecnico }}
-                </td>
+    <div id="tabela-container">
+        <table border="1" id="tabela">
+            <thead>
+                <tr>
+                    <th>Técnico</th>
+                    <th>Data</th>
+                    <th>OS</th>
+                    <th>Cliente</th>
+                    <th>Modelo</th>
+                    <th>Hora</th>
+                    <th>Tipo</th>
+                    <th>Histórico</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tecnico in tecnicos %}
+                {% for dia in dias_semana %}
+                {% set ags = agendamentos[tecnico][dia] %}
+                {% if ags %}
+                {% for ag in ags %}
+                <tr class="{{ ag.tipo | lower }}">
+                    <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
+                        {{ tecnico }}
+                    </td>
 
-                {# Mostra a data apenas na primeira linha do dia #}
-                {% if loop.index0 == 0 %}
-                <td rowspan="{{ ags | length }}">{{ dia.strftime('%d/%m') }}</td>
+                    {# Mostra a data apenas na primeira linha do dia #}
+                    {% if loop.index0 == 0 %}
+                    <td rowspan="{{ ags | length }}">{{ dia.strftime('%d/%m') }}</td>
+                    {% endif %}
+
+                    <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="os">{{ ag.os }}</td>
+                    <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="cliente">{{ ag.cliente
+                        }}
+                    </td>
+                    <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="modelo">{{ ag.modelo
+                        }}
+                    </td>
+                    <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="hora">{{ ag.hora }}
+                    </td>
+                    <td>{{ ag.tipo }}</td>
+                    <td>
+                        <button class="historico" data-id="{{ ag.id }}">
+                            <span class="material-symbols-outlined">
+                                history
+                            </span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn-apagar" data-id="{{ ag.id }}"><span class="material-symbols-outlined">
+                                cancel
+                            </span></button>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr class="vazio">
+                    <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
+                        {{ tecnico }}
+                    </td>
+                    <td>{{ dia.strftime('%d/%m') }}</td>
+                    <td colspan="7">vazio</td>
+                </tr>
                 {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="os">{{ ag.os }}</td>
-                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="cliente">{{ ag.cliente }}
-                </td>
-                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="modelo">{{ ag.modelo }}
-                </td>
-                <td contenteditable="true" class="editavel" data-id="{{ ag.id }}" data-campo="hora">{{ ag.hora }}</td>
-                <td>{{ ag.tipo }}</td>
-                <td>
-                    <button class="historico" data-id="{{ ag.id }}">
-                        <span class="material-symbols-outlined">
-                            history
-                        </span>
-                    </button>
-                </td>
-                <td>
-                    <button class="btn-apagar" data-id="{{ ag.id }}"><span class="material-symbols-outlined">
-                            cancel
-                        </span></button>
-                </td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr class="vazio">
-                <td class="nome-tecnico tecnico-{{ tecnico | lower | replace(' ', '-') }}">
-                    {{ tecnico }}
-                </td>
-                <td>{{ dia.strftime('%d/%m') }}</td>
-                <td colspan="7">vazio</td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
     <div class="fundopreto">
         <div id="caixahistorico">
 
@@ -153,4 +164,3 @@
 </body>
 
 </html>
-

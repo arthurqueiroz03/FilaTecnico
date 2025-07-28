@@ -1,23 +1,20 @@
-
-body{
+body {
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .container {
-    position: absolute;
- 
-    left: 50%;
-    transform: translateX(-50%); 
-    
-    display: flex;
-    flex-direction: column;
-    
-    width: 90vh;
-    height: auto;
+    position: relative;
+    left: auto;
+    transform: none;
+
+    width: 90%;
+    max-width: 600px;
+    /* limita para desktop */
+    margin: 0 auto;
     padding: 20px;
 
-    
+
     border-radius: 12px;
     background-color: #fff;
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -91,9 +88,9 @@ select {
 }
 
 select:focus {
-  outline: none;
-  border-color: #00c3ff;
-  box-shadow: 0 0 0 2px rgba(46, 89, 125, 0.3);
+    outline: none;
+    border-color: #00c3ff;
+    box-shadow: 0 0 0 2px rgba(46, 89, 125, 0.3);
 }
 
 #ok {
@@ -102,20 +99,75 @@ select:focus {
     margin-top: 70px;
 }
 
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  #msg-sucesso {
+    width: 90%;
+    height: auto;
+    font-size: 24px;
+    padding: 20px;
+  }
+
+  #caixahistorico {
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  #copiar {
+    width: 100%;
+  }
+
+  .filtros, .legenda {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  table {
+    font-size: 0.9rem;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  #fechar {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+}
+
+
 #msg-sucesso {
-  display: none;
-  position: absolute;
-  color: green;
-  margin-top: 10px;
-  padding: 35px;
-  border-radius: 12px;
-  background-color: #fff;
-  z-index: 999;
-  height: 300px;
-  width: 900px;
-  top: 30vh;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 48px;
-  text-align: center;
+    display: none;
+    position: absolute;
+    color: green;
+    margin-top: 10px;
+    padding: 35px;
+    border-radius: 12px;
+    background-color: #fff;
+    z-index: 999;
+    height: 300px;
+    width: 900px;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    text-align: center;
 }
